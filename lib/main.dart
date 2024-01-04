@@ -1,4 +1,5 @@
-import 'package:chatapp/Pages/login_page.dart';
+import 'package:chatapp/Pages/register_page.dart';
+import 'package:chatapp/Services/login_or_register.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,10 +12,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Chat App',
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: LoginOrRegister(),
     );
   }
 }

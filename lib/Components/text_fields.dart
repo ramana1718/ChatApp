@@ -18,7 +18,7 @@ class CommonTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey),
-          border: InputBorder.none,
+          border: OutlineInputBorder(),
         ));
   }
 }

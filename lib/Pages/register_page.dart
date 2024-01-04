@@ -2,18 +2,19 @@ import 'package:chatapp/Components/button.dart';
 import 'package:chatapp/Components/text_fields.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  void SignIn() {}
+  final confirmpasswordController = TextEditingController();
+  void SignUp() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +51,24 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 20,
               ),
-              CommonButton(onTap: SignIn, text: "Sign In"),
+              CommonTextField(
+                  controller: confirmpasswordController,
+                  hintText: 'Confirm Password',
+                  obscureText: true),
+              const SizedBox(
+                height: 20,
+              ),
+              CommonButton(onTap: SignUp, text: "Sign Up"),
               const SizedBox(
                 height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Not an User ?"),
+                  Text("Already a User?"),
                   GestureDetector(
                     child: Text(
-                      "Register Now",
+                      "Login Now",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onTap: widget.onTap,
