@@ -1,8 +1,10 @@
-import 'package:chatapp/Pages/register_page.dart';
 import 'package:chatapp/Services/login_or_register.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
