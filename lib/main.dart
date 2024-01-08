@@ -1,11 +1,26 @@
-import 'package:chatapp/Services/login_or_register.dart';
+import 'package:chatapp/Services/auth_gate.dart';
+import 'package:chatapp/Services/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: 'AIzaSyBJ8_iepzYbJCXJjWhaG9-2HucRgdsM-18',
+      authDomain: 'chatapp-58cfe.firebaseapp.com',
+      projectId: 'chatapp-58cfe',
+      storageBucket:
+          'https://console.firebase.google.com/u/1/project/chatapp-58cfe/storage/chatapp-58cfe.appspot.com/files',
+      messagingSenderId: '36964825983',
+      appId: '1:36964825983:android:70b6116737108f6a46384a',
+    ),
+  );
+  runApp(ChangeNotifierProvider(
+    create: (context) => AuthService(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +32,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Chat App',
       debugShowCheckedModeBanner: false,
-      home: LoginOrRegister(),
+      home: AuthGate(),
     );
   }
 }

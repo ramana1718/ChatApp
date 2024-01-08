@@ -1,6 +1,8 @@
 import 'package:chatapp/Components/button.dart';
 import 'package:chatapp/Components/text_fields.dart';
+import 'package:chatapp/Services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -13,7 +15,19 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  void SignIn() {}
+  void SignIn() async {
+    final authService = Provider.of<AuthService>(context, listen: false);
+    try {
+      await authService.signInWithEmailPassword(
+          emailController.text, passwordController.text);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        e.toString(),
+      )));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,13 +71,13 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Not an User ?"),
+                  const Text("Not an User ?"),
                   GestureDetector(
-                    child: Text(
+                    onTap: widget.onTap,
+                    child: const Text(
                       "Register Now",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    onTap: widget.onTap,
                   )
                 ],
               )
