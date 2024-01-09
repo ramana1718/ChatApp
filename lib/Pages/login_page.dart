@@ -15,7 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  void SignIn() async {
+  void signIn() async {
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
       await authService.signInWithEmailPassword(
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 20,
               ),
-              CommonButton(onTap: SignIn, text: "Sign In"),
+              CommonButton(onTap: signIn, text: "Sign In"),
               const SizedBox(
                 height: 10,
               ),

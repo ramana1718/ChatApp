@@ -12,7 +12,7 @@ void main() async {
       authDomain: 'chatapp-58cfe.firebaseapp.com',
       projectId: 'chatapp-58cfe',
       storageBucket:
-          'https://console.firebase.google.com/u/1/project/chatapp-58cfe/storage/chatapp-58cfe.appspot.com/files',
+          'https://console.firebase.google.com/u/0/project/chatapp-58cfe/storage/chatapp-58cfe.appspot.com/files',
       messagingSenderId: '36964825983',
       appId: '1:36964825983:android:70b6116737108f6a46384a',
     ),
