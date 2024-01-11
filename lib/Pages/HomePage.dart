@@ -1,5 +1,4 @@
-import 'dart:js';
-
+import 'package:chatapp/Pages/chat_page.dart';
 import 'package:chatapp/Services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,20 +22,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("HomePage"),
-        actions: [
-          IconButton(
-            onPressed: signOut,
-            icon: const Icon(Icons.logout),
-          )
-        ],
-      ),
-      body: _buildUserList(),
-    );
+        appBar: AppBar(
+          title: const Text("HomePage"),
+          actions: [
+            IconButton(
+              onPressed: signOut,
+              icon: const Icon(Icons.logout),
+            )
+          ],
+        ),
+        body: _buildUserList());
   }
 
-  Widget _buildUserList(DocumentSnapshot document) {
+  Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('users').snapshots(),
         builder: (context, snapshot) {
@@ -61,9 +59,15 @@ class _HomePageState extends State<HomePage> {
         title: data['email'],
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ChatPage()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatPage(
+                      recieverUserEmail: data['email'],
+                      recieverUserId: data['uid'])));
         },
       );
+    } else {
+      return Container();
     }
   }
 }
