@@ -36,38 +36,46 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('users').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Text("error");
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("loading...");
-          }
-          return ListView(
-            children: snapshot.data!.docs
-                .map<Widget>((doc) => _buildUserListItem(doc))
-                .toList(),
-          );
-        });
+      stream: FirebaseFirestore.instance.collection('users').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Text("error");
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("loading...");
+        }
+        print("tfhj");
+        return ListView(
+          children: snapshot.data!.docs
+              .map<Widget>((doc) => _buildUserListItem(doc))
+              .toList(),
+        );
+      },
+    );
   }
 
   Widget _buildUserListItem(DocumentSnapshot document) {
+    print('buu');
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
     if (_auth.currentUser!.email != data['email']) {
+      print("oudhvdvkds");
+      print(data['email']);
       return ListTile(
-        title: data['email'],
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChatPage(
-                      recieverUserEmail: data['email'],
-                      recieverUserId: data['uid'])));
-        },
-      );
+          title: Text(data['email']),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatPage(
+                        recieverUserEmail: data['email'],
+                        recieverUserId: data['uid'])));
+          });
     } else {
-      return Container();
+      print("oudhvdvk===ds");
+
+      return Container(
+        child: Text("fu"),
+      );
     }
   }
 }
