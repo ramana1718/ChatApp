@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('users').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Users').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return const Text("error");
@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
           return const Text("loading...");
         }
         print("tfhj");
+        print(snapshot.data!.docs);
         return ListView(
           children: snapshot.data!.docs
               .map<Widget>((doc) => _buildUserListItem(doc))
@@ -73,9 +74,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       print("oudhvdvk===ds");
 
-      return Container(
-        child: Text("fu"),
-      );
+      return Container();
     }
   }
 }
